@@ -1,5 +1,7 @@
 ## jcat - slow down scrolling
 
+** UNDER CONSTRUCTION **
+
 This is a little utility will allow you to
 slowdown scrolling.
 Useful if you do not want to pipe information
