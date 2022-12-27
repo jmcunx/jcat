@@ -1,11 +1,9 @@
 ## jcat - slow down scrolling
 
-** UNDER CONSTRUCTION **
-
 This is a little utility will allow you to
-slowdown scrolling.
+slowdown scrolling of file or stream.
 Useful if you do not want to pipe information
-through more(1) or less(1).
+through more(1), less(1) or pg(1).
 
 [GNU automake](https://en.wikipedia.org/wiki/Automake)
 only confuses me, but this seems to be good enough for me.

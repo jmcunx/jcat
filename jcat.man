@@ -1,0 +1,81 @@
+.\" 
+.\" Copyright (c) 2022 2023
+.\"     John McCue <jmccue@jmcunx.com>
+.\" 
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\" 
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\" 
+.TH JCAT 1 "2022/12/27" "JMC" "User Commands"
+.SH NAME
+jcat - print data from a file slowly
+.SH SYNOPSIS
+jcat [OPTIONS] [FILE...]
+.SH DESCRIPTION
+Read data and echos it out to stdout,
+pausing a specified number of milliseconds
+between line prints.
+.PP
+If no files (FILE) are specified on the command line or
+if FILE has name '-', stdin (Standard Input) is used.
+.TP
+-e file
+Optional, if used, write error messages to file 'file'.
+If not specified, errors written to stderr.
+.TP
+-f
+Optional, Force file create.
+Create file even if the target file exists.
+.TP
+-h
+Show brief help and exit.
+.TP
+-p 
+Optional, pause 'n' milliseconds between line prints.
+Default, pause 500 milliseconds between each line.
+.TP
+-V
+Output version information and exit.
+.TP
+-v
+Optional, Verbose Level.
+Print information about the run,
+default do not show run messages.
+Can be specified multiple times,
+each specification increases verbose level:
+.nf
+    Level  Meaning
+    -----  ---------------------------------------------
+    = 0    Only show Error Messages
+    >= 1   Show headings on stdout as each file
+           is processed
+    >= 2   Show File Summary other information on stderr
+.fi
+.SH DIAGNOSTICS
+If you specify '-e', in some cases info will still be
+written to stderr.
+This can occur during Command Line Argument Processing.
+.SH SEE-ALSO
+cat(1),
+head(1),
+less(1),
+more(1),
+pg(1),
+pr(1),
+setvbuf(3),
+sh(1),
+tail(1),
+vis(1)
+.SH ERROR-CODES
+.nf
+0 success
+1 processing error or help/rev displayed
+.fi

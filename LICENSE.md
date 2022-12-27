@@ -2,7 +2,7 @@ This is licensed using the [ISC Licence](https://en.wikipedia.org/wiki/ISC_licen
 
 ISC License
 
-Copyright 2009 ... 2021 2022 John McCue
+Copyright 2022 2023 John McCue
 
 Permission to use, copy, modify, and/or distribute this software for
 any purpose with or without fee is hereby granted, provided that the
