@@ -58,7 +58,7 @@ struct s_work
 #define ARG_ERR           'e'  /* Output Error File                  */
 #define ARG_FORCE         'f'  /* force create files                 */
 #define ARG_HELP          'h'  /* Show Help                          */
-#define ARG_PAUSE         'p'  /* Pause for for microseconds         */
+#define ARG_PAUSE         's'  /* Pause for for microseconds         */
 #define ARG_VERBOSE       'v'  /* Verbose                            */
 #define ARG_VERSION       'V'  /* Show Version Information           */
 
@@ -73,7 +73,7 @@ struct s_work
 #define USG_MSG_ARG_ERR                  "\t%c%c file\t\t: Write errors to file 'file', default stderr\n"
 #define USG_MSG_ARG_FORCE                "\t%c%c\t\t: force create of files when found\n"
 #define USG_MSG_ARG_HELP                 "\t%c%c\t\t: Show brief help and exit\n"
-#define USG_MSG_ARG_PAUSE                "\t%c%c n\t\t: Pause for 'n' microseconds\n"
+#define USG_MSG_ARG_PAUSE                "\t%c%c n\t\t: Sleep for 'n' microseconds\n"
 #define USG_MSG_ARG_VERBOSE_8            "\t%c%c\t\t: verbose level, each time specified level increases\n"
 #define USG_MSG_ARG_VERSION              "\t%c%c\t\t: Show revision information and exit\n"
 
