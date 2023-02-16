@@ -38,8 +38,8 @@ Create file even if the target file exists.
 -h
 Show brief help and exit.
 .TP
--p
-Optional, pause 'n' milliseconds between line prints.
+-s
+Optional, sleep 'n' milliseconds between line prints.
 Default, pause 500 milliseconds between each line.
 .TP
 -V
