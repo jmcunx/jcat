@@ -41,6 +41,7 @@ void show_brief_help(FILE *fp, char *pname)
   fprintf(fp, USG_MSG_ARG_ERR,       SWITCH_CHAR, ARG_ERR);
   fprintf(fp, USG_MSG_ARG_FORCE,     SWITCH_CHAR, ARG_FORCE);
   fprintf(fp, USG_MSG_ARG_HELP,      SWITCH_CHAR, ARG_HELP);
+  fprintf(fp, USG_MSG_ARG_READS,     SWITCH_CHAR, ARG_READS);
   fprintf(fp, USG_MSG_ARG_PAUSE,     SWITCH_CHAR, ARG_PAUSE);
   fprintf(fp, USG_MSG_ARG_VERSION,   SWITCH_CHAR, ARG_VERSION);
   fprintf(fp, USG_MSG_ARG_VERBOSE_8, SWITCH_CHAR, ARG_VERBOSE);

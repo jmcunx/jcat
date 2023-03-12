@@ -45,9 +45,9 @@ struct s_work
 {
   struct s_file_info err;         /* default stderr        */
   char *prog_name;                /* real program name     */
-  int num_files;                  /* # of files to process */
   int verbose;                    /* TRUE or FALSE         */
   long int milliseconds;          /* milliseconds          */
+  long int pause_reads;           /* Pause after this reads*/
   int force;                      /* Force Create, T or F  */
 } ;
 
@@ -58,6 +58,7 @@ struct s_work
 #define ARG_ERR           'e'  /* Output Error File                  */
 #define ARG_FORCE         'f'  /* force create files                 */
 #define ARG_HELP          'h'  /* Show Help                          */
+#define ARG_READS         'r'  /* Pause after this many reads        */
 #define ARG_PAUSE         's'  /* Pause for for microseconds         */
 #define ARG_VERBOSE       'v'  /* Verbose                            */
 #define ARG_VERSION       'V'  /* Show Version Information           */
@@ -74,6 +75,7 @@ struct s_work
 #define USG_MSG_ARG_FORCE                "\t%c%c\t\t: force create of files when found\n"
 #define USG_MSG_ARG_HELP                 "\t%c%c\t\t: Show brief help and exit\n"
 #define USG_MSG_ARG_PAUSE                "\t%c%c n\t\t: Sleep for 'n' microseconds\n"
+#define USG_MSG_ARG_READS                "\t%c%c n\t\t: After 'n' reads, pause\n"
 #define USG_MSG_ARG_VERBOSE_8            "\t%c%c\t\t: verbose level, each time specified level increases\n"
 #define USG_MSG_ARG_VERSION              "\t%c%c\t\t: Show revision information and exit\n"
 
@@ -81,6 +83,7 @@ struct s_work
 #define MSG_ERR_E002  "ERROR E002: Cannot open '%s' for write, processing aborted\n"
 #define MSG_ERR_E008  "ERROR E008: '%s' is an invalid value for %c%c, must be numeric\n"
 #define MSG_ERR_E025  "ERROR E025: File %s cannot be created, already exists\n"
+#define MSG_ERR_E066  "ERROR E066: '%ld' is an invalid value for %c%c, must be > %d\n"
 #define MSG_ERR_E074  "ERROR E074: 'Too many Arguments specified for %c%c\n"
 #define MSG_ERR_E080  "ERROR E080: cannot allocate initial memory : %s\n"
 #define MSG_INFO_I072 "I072:    Lines Reads:  %9ld - File %s\n"

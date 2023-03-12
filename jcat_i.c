@@ -43,9 +43,9 @@ void init_w(struct s_work *w, char *a)
   w->err.fp    = stderr;
 
   w->prog_name        = PROG_NAME;
-  w->num_files        = 0;
   w->verbose          = 0;
   w->milliseconds     = 500L;
+  w->pause_reads      = 100L;
 
 }  /* init_w() */
 
@@ -73,11 +73,10 @@ void process_arg(int argc, char **argv, struct s_work *w)
 {
   char ckarg[SCKARG];
   int opt;
-  int i;
 
-  snprintf(ckarg, SCKARG, "%c%c%c%c%c:%c:", 
+  snprintf(ckarg, SCKARG, "%c%c%c%c%c:%c:%c:", 
 	  ARG_FORCE, ARG_HELP, ARG_VERBOSE, ARG_VERSION,
-	  ARG_ERR, ARG_PAUSE);
+	  ARG_ERR, ARG_PAUSE, ARG_READS);
 
   while ((opt = getopt(argc, argv, ckarg)) != -1)
     {
@@ -98,6 +97,15 @@ void process_arg(int argc, char **argv, struct s_work *w)
 	      exit(EXIT_FAILURE);
 	    }
 	  break;
+	case ARG_READS:
+	  if (is_numr(optarg) == (int) TRUE)
+	    w->pause_reads = atol(optarg);
+	  else
+	    {
+	      fprintf(stderr, MSG_ERR_E008, optarg, SWITCH_CHAR, ARG_READS);
+	      exit(EXIT_FAILURE);
+	    }
+	  break;
 	case ARG_VERBOSE:
 	  w->verbose++;
 	  break;
@@ -114,16 +122,6 @@ void process_arg(int argc, char **argv, struct s_work *w)
 	}
     }
 
-  /*** open 'out' files ***/
-  if ( ! open_out(stderr, &(w->err), w->prog_name, w->force))
-    w->err.fp = stderr;
-
-  /*** Count number of files to process */
-  for (i = optind; i < argc; i++)
-    (w->num_files)++;
-  if (w->num_files == 0)
-    (w->num_files)++;  /* stdin when no files */
-
 } /* END process_arg() */
 
 /*
@@ -136,5 +134,23 @@ void init(int argc, char **argv, struct s_work *w)
   init_w(w, argv[0]);
 
   process_arg(argc, argv, w);
+
+  /*** check arguments ***/
+  if (w->milliseconds < 1)
+    {
+	fprintf(w->err.fp, MSG_ERR_E066, w->milliseconds, SWITCH_CHAR, ARG_PAUSE, 0);
+	fprintf(w->err.fp, MSG_ERR_E000, w->prog_name, SWITCH_CHAR, ARG_HELP);
+	exit(EXIT_FAILURE);
+    }
+  if (w->pause_reads < 1)
+    {
+	fprintf(w->err.fp, MSG_ERR_E066, w->pause_reads, SWITCH_CHAR, ARG_READS, 0);
+	fprintf(w->err.fp, MSG_ERR_E000, w->prog_name, SWITCH_CHAR, ARG_HELP);
+	exit(EXIT_FAILURE);
+    }
+
+  /*** open 'out' files ***/
+  if ( ! open_out(stderr, &(w->err), w->prog_name, w->force))
+    w->err.fp = stderr;
 
 }  /* end: init() */

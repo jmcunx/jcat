@@ -79,10 +79,7 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
   FILE *fp;
   
   if (w->verbose > 0)
-    {
-      show_file_heading(w, fname);
-      sleepm(w->milliseconds);
-    }
+    show_file_heading(w, fname);
   
   if ( ! open_in(&fp, fname, w->err.fp) )
     return;
@@ -95,7 +92,8 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
       wbytes += strlen((*buf));
       lines_write++;
       fprintf(stdout, "%s", (*buf));
-      sleepm(w->milliseconds);
+      if ((lines_read % w->pause_reads) == 0)
+	sleepm(w->milliseconds);
     }
   
   /*** complete ***/

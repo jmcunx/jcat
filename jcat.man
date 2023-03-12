@@ -38,9 +38,15 @@ Create file even if the target file exists.
 -h
 Show brief help and exit.
 .TP
--s
-Optional, sleep 'n' milliseconds between line prints.
-Default, pause 500 milliseconds between each line.
+-r n
+Optional, after 'n' Reads, pause for
+the specified milliseconds (see -s below).
+If not specified default to 100 reads.
+.TP
+-s n
+Optional, if used, after the specified number of Records
+are read, sleep for 'n' milliseconds (see -r above).
+If not supplied, defaults to 500 milliseconds.
 .TP
 -V
 Output version information and exit.
