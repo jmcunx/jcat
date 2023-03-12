@@ -78,7 +78,7 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
   long int lines_write = 0L;
   FILE *fp;
   
-  if (w->verbose > 0)
+  if (w->verbose > 1)
     show_file_heading(w, fname);
   
   if ( ! open_in(&fp, fname, w->err.fp) )
@@ -97,7 +97,7 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
     }
   
   /*** complete ***/
-  if (w->verbose > 1)
+  if (w->verbose > 0)
     {
       if (fname != (char *) NULL)
 	{

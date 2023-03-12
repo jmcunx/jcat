@@ -59,11 +59,12 @@ Can be specified multiple times,
 each specification increases verbose level:
 .nf
     Level  Meaning
-    -----  ---------------------------------------------
+    -----  ------------------------------------------------
     = 0    Only show Error Messages
-    >= 1   Show headings on stdout as each file
-           is processed
-    >= 2   Show File Summary other information on stderr
+    >= 1   Show File Summary other information on stderr
+    >= 2   Show headings on Output for each file processed.
+           This means lines will be added to the Output File
+           showing what Input File was the source.
 .fi
 .SH DIAGNOSTICS
 If you specify '-e', in some cases info will still be
