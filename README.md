@@ -5,6 +5,8 @@ slowdown scrolling of file or stream.
 Useful if you do not want to pipe information
 through more(1), less(1) or pg(1).
 
+[j\_lib2](https://github.com/jmcunx/j_lib2) is an **optional** dependency.
+
 [GNU automake](https://en.wikipedia.org/wiki/Automake)
 only confuses me, but this seems to be good enough for me.
 

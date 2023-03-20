@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 2023
+ * Copyright (c) 2022 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -29,6 +29,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#ifdef HAVE_JLIB
+#include <j_lib2.h>
+#include <j_lib2m.h>
+#endif
+
 #include "jcat.h"
 
 #define SCKARG 80
@@ -42,7 +47,7 @@ void init_w(struct s_work *w, char *a)
   init_finfo(&(w->err));
   w->err.fp    = stderr;
 
-  w->prog_name        = PROG_NAME;
+  w->prog_name        = j2_get_prgname(a, PROG_NAME);
   w->verbose          = 0;
   w->milliseconds     = 500L;
   w->pause_reads      = 100L;
@@ -89,7 +94,7 @@ void process_arg(int argc, char **argv, struct s_work *w)
 	  show_brief_help(stderr, w->prog_name);
 	  break;
 	case ARG_PAUSE:
-	  if (is_numr(optarg) == (int) TRUE)
+	  if (j2_is_numr(optarg) == (int) TRUE)
 	    w->milliseconds = atol(optarg);
 	  else
 	    {
@@ -98,7 +103,7 @@ void process_arg(int argc, char **argv, struct s_work *w)
 	    }
 	  break;
 	case ARG_READS:
-	  if (is_numr(optarg) == (int) TRUE)
+	  if (j2_is_numr(optarg) == (int) TRUE)
 	    w->pause_reads = atol(optarg);
 	  else
 	    {
@@ -138,14 +143,14 @@ void init(int argc, char **argv, struct s_work *w)
   /*** check arguments ***/
   if (w->milliseconds < 1)
     {
-	fprintf(w->err.fp, MSG_ERR_E066, w->milliseconds, SWITCH_CHAR, ARG_PAUSE, 0);
-	fprintf(w->err.fp, MSG_ERR_E000, w->prog_name, SWITCH_CHAR, ARG_HELP);
+	fprintf(w->err.fp, MSG_ERR_E066L, w->milliseconds, SWITCH_CHAR, ARG_PAUSE, 0);
+	fprintf(w->err.fp, MSG_ERR_E000,  w->prog_name, SWITCH_CHAR, ARG_HELP);
 	exit(EXIT_FAILURE);
     }
   if (w->pause_reads < 1)
     {
-	fprintf(w->err.fp, MSG_ERR_E066, w->pause_reads, SWITCH_CHAR, ARG_READS, 0);
-	fprintf(w->err.fp, MSG_ERR_E000, w->prog_name, SWITCH_CHAR, ARG_HELP);
+	fprintf(w->err.fp, MSG_ERR_E066L, w->pause_reads, SWITCH_CHAR, ARG_READS, 0);
+	fprintf(w->err.fp, MSG_ERR_E000,  w->prog_name, SWITCH_CHAR, ARG_HELP);
 	exit(EXIT_FAILURE);
     }
 

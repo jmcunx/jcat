@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 2023
+ * Copyright (c) 2022 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -23,6 +23,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+#ifdef HAVE_JLIB
+#include <j_lib2.h>
+#include <j_lib2m.h>
+#endif
 
 #include "jcat.h"
 
@@ -58,6 +63,10 @@ void show_rev(FILE *fp, char *pname)
 {
 
   fprintf(fp,"%s %s:\n", pname, LIT_REV);
+
+#ifdef J_LIB2_H
+  fprintf(fp, "\t%s %s\n", LIT_INFO_02, j2_get_build());
+#endif
 
 #ifdef OSTYPE
   fprintf(fp,"\t%s\n",OSTYPE);

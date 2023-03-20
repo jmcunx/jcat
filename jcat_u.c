@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 2023
+ * Copyright (c) 2022 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -40,81 +40,12 @@
 #endif
 #endif
 
-#include "jcat.h"
-
-/*
- * is_numr() -- determines if all characters are numeric
- */
-int is_numr(char *s)
-
-{
-  if (s == (char *) NULL)
-    return((int) FALSE); /* NULL pointer */
-  
-  for ( ; (*s) != JLIB2_CHAR_NULL; s++)
-    {
-      if ( ! isdigit((int)(*s)) )
-	return(FALSE);
-    }
-  
-  return(TRUE);
-
-}
-
-/*
- * f_exist() -- determines if a file exists
- */
-int f_exist(char *file_name)
-
-{
-  if (file_name == (char *) NULL)
-    return((int) FALSE);
-
-#ifdef _MSDOS
-  if (access(file_name, 00) == -1)
-    return (FALSE);
-  else
-    return (TRUE);
-#else
-  struct stat file_info;
-  if (stat(file_name, &file_info) == 0)
-    return (TRUE);
-  else
-    return (FALSE);
+#ifdef HAVE_JLIB
+#include <j_lib2.h>
+#include <j_lib2m.h>
 #endif
 
-}
-
-/*
- * sleepm() -- sleep for milliseconds
- */
-void sleepm(long int micro)
-{
-  struct timespec req;
-  int secs = 0;
-
-  if (micro < 1000L)
-    {
-      req.tv_sec = (time_t) 0;
-      req.tv_nsec = micro * 1000000L;
-    }
-  else
-    {
-      secs = micro;
-      req.tv_sec = (time_t) 0;
-      req.tv_nsec = 0L;
-      while (secs > 1000L)
-	{
-	  req.tv_sec++;
-	  secs -= 1000L;
-	  if (secs < 1000L)
-	    req.tv_nsec = secs * 1000000L;
-	}
-    }
-
-  nanosleep(&req, NULL);
-  
-}
+#include "jcat.h"
 
 /*
  * init_finfo() -- initialize out file structure
@@ -191,7 +122,7 @@ int open_out(FILE *wfp, struct s_file_info *f, char *prog_name, int force)
 
   if (force == (int) FALSE)
     {
-      if ( f_exist(f->fname) )
+      if ( j2_f_exist(f->fname) )
 	{
 	  fprintf(wfp, MSG_ERR_E025, f->fname);
 	  fprintf(wfp, MSG_ERR_E000, prog_name, SWITCH_CHAR, ARG_HELP);

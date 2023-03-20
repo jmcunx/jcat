@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 2023
+ * Copyright (c) 2022 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -36,6 +36,11 @@
 #endif
 #ifdef __NetBSD_Version__
 #include <err.h>
+#endif
+
+#ifdef HAVE_JLIB
+#include <j_lib2.h>
+#include <j_lib2m.h>
 #endif
 
 #include "jcat.h"
@@ -85,7 +90,7 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
     return;
 
   /*** process data ***/
-  while ((cbytes = getline(buf, bsize, fp)) > (ssize_t) -1)
+  while ((cbytes = j2_getline(buf, bsize, fp)) > (ssize_t) -1)
     {
       lines_read++;
       tbytes += cbytes;
@@ -93,7 +98,7 @@ void process_a_file(struct s_work *w, char *fname, char **buf, size_t *bsize)
       lines_write++;
       fprintf(stdout, "%s", (*buf));
       if ((lines_read % w->pause_reads) == 0)
-	sleepm(w->milliseconds);
+	j2_sleepm(w->milliseconds);
     }
   
   /*** complete ***/
