@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 2023
+ * Copyright (c) 2022 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -110,12 +110,12 @@ int open_out(FILE *, struct s_file_info *, char *, int);
 void close_out(struct s_file_info *);
 
 #ifdef NO_JLIB
-int j2_f_exist(char *file_name);
-int j2_is_numr(char *s);
-void j2_sleepm(long int micro);
 SSIZE_T j2_getline(char **buf, size_t *n, FILE *fp);
 char *j2_get_prgname(char *argv_0, char *default_name);
+int j2_f_exist(char *file_name);
+int j2_is_numr(char *s);
 long int j2_clr_str(char *s, char c, int size);
+void j2_sleepm(long int micro);
 #endif
 
 #endif /*  JCAT_H  */
