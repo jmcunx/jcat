@@ -173,6 +173,8 @@ int main(int argc, char **argv)
   process_all(argc, argv, &w);
   
   close_out(&(w.err));
+  if (w.prog_name != (char *) NULL)
+    free(w.prog_name);
   exit(EXIT_SUCCESS);
 
 }  /* main() */
